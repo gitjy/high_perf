@@ -14,3 +14,4 @@ checkin 2018-08-22
 checkin 2018-08-23
 checkin 2018-08-24
 checkin 2018-08-27
+checkin 2018-08-28

@@ -26,3 +26,4 @@ checkin 2018-09-06
 checkin 20180-09-07
 checkin 2018-09-08
 checkin 2018-09-10
+checkin 2018-09-10

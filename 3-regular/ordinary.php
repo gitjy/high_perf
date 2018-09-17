@@ -77,6 +77,19 @@ print_r($matches);
 echo "<br/><br/>";
 
 
+echo '表达式中包含^、$至少一个且字符串中有换行符”\n”时，m修饰符才起作用';
+echo "<br/>";
+$str = "this is reg
+Reg
+this is
+regexp turtor,oh reg";
+if (preg_match_all('%.*reg%i',$str, $matches)) {
+    print_r($matches);
+} else {
+    echo "no match";
+}
+
+
 
 
 

@@ -65,9 +65,9 @@ echo "<br/><br/>";
 echo "匹配email";
 $arr = ['110798449@qq.com', 'service@exmaple.cn', 'kefu@shou.com.cn'];
 $matches = [];
-$pattern['AreaCode'] = '#\w{3,16}@(\w{1,64}\.\w{2,5})+#';
+$pattern['email'] = '#\w{3,16}@(\w{1,64}\.\w{2,5})+#';
 //preg_match_all($pattern['AreaCode'], $arr[0], $matches);
-$matches = preg_grep($pattern['AreaCode'], $arr);
+$matches = preg_grep($pattern['email'], $arr);
 print_r($matches);
 echo "<br/><br/>";
 
@@ -83,13 +83,108 @@ $str = "this is reg
 Reg
 this is
 regexp turtor,oh reg";
-if (preg_match_all('%.*reg%i',$str, $matches)) {
+if (preg_match_all('%.*reg%mi',$str, $matches)) {
+    print_r($matches);
+} else {
+    echo "no match";
+}
+
+echo "<br/>";
+if (preg_match_all('%.*reg$%mi',$str, $matches)) {
     print_r($matches);
 } else {
     echo "no match";
 }
 
 
+echo "<br/>";
+if (preg_match_all('%^t.*$%mi',$str, $matches)) {
+    print_r($matches);
+} else {
+    echo "no match";
+}
+echo "<br/><br/>";
+
+
+/**
+html匹配
+匹配所有HTML标签
+<\/?\b[^>]+>
+
+匹配所有HTML标签，排除p标签
+<(?!/?p\b)[^]b+>
+
+<title>.*</\title>
+匹配a标签
+<a[^>]+>
+
+匹配成对的a标签
+<a[^>]*>([^<>])*<\/a>
+
+匹配不包含属性的简单html标签
+(?<=<(\w+)>).*(?=<\/\1>)
+
+匹配div标签里的内容
+(?<=<div>).*(?=</div>)
+
+匹配所有的HTML标签
+</?\b[^>]+>
+*/
+/*
+echo "html匹配<pre>";
+$str = file_get_contents('mask.html');
+$matches = [];
+$pattern['htmlTag'] = '#<\/?\b[^>]+>#';
+preg_match_all($pattern['htmlTag'], $str, $matches);
+//$matches = preg_grep($pattern['htmlTag'], $arr);
+print_r(array_map('htmlspecialchars', $matches[0]));
+//print_r($matches);
+echo "</pre><br/><br/>";*/
+
+
+/*echo "匹配所有HTML标签，排除p标签<pre>";
+$str = file_get_contents('mask.html');
+$matches = [];
+$pattern['htmlTag'] = '#<(?!/?p\b)[^>]+>#';
+preg_match_all($pattern['htmlTag'], $str, $matches);
+//$matches = preg_grep($pattern['htmlTag'], $arr);
+print_r(array_map('htmlspecialchars', $matches[0]));
+//print_r($matches);
+echo "</pre><br/><br/>";*/
+
+echo "匹配不包含属性的简单html标签<pre>";
+$str = file_get_contents('mask.html');
+$matches = [];
+$pattern['a'] = '#(?<=<div>).*#';
+//$pattern['a'] = '#<div[^>]*>(.*?)<\/div>#s';
+preg_match_all($pattern['a'], $str, $matches);
+//$matches = preg_grep($pattern['htmlTag'], $arr);
+//print_r(array_map('htmlspecialchars', $matches[0]));
+print_r($matches);
+echo "</pre><br/><br/>";
+
+
+echo "匹配div标签<pre>";
+$str = file_get_contents('mask.html');
+$matches = [];
+$pattern['htmlTag'] = '#<(?=/?div\b)[^>]+>#';
+preg_match_all($pattern['htmlTag'], $str, $matches);
+//$matches = preg_grep($pattern['htmlTag'], $arr);
+print_r(array_map('htmlspecialchars', $matches[0]));
+//print_r($matches);
+echo "</pre><br/><br/>";
+
+
+echo "匹配成对的div标签<pre>";
+$str = file_get_contents('mask.html');
+$matches = [];
+$pattern['a'] = '#<div[^>]*>([^<>]*)<\/div>#';
+//$pattern['a'] = '#<div[^>]*>(.*?)<\/div>#s';
+preg_match_all($pattern['a'], $str, $matches);
+//$matches = preg_grep($pattern['htmlTag'], $arr);
+print_r(array_map('htmlspecialchars', $matches[0]));
+//print_r($matches);
+echo "</pre><br/><br/>";
 
 
 

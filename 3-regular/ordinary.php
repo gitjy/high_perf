@@ -121,8 +121,6 @@ html匹配
 匹配成对的a标签
 <a[^>]*>([^<>])*<\/a>
 
-匹配不包含属性的简单html标签
-(?<=<(\w+)>).*(?=<\/\1>)
 
 匹配div标签里的内容
 (?<=<div>).*(?=</div>)
@@ -130,6 +128,7 @@ html匹配
 匹配所有的HTML标签
 </?\b[^>]+>
 */
+
 /*
 echo "html匹配<pre>";
 $str = file_get_contents('mask.html');
@@ -151,18 +150,6 @@ preg_match_all($pattern['htmlTag'], $str, $matches);
 print_r(array_map('htmlspecialchars', $matches[0]));
 //print_r($matches);
 echo "</pre><br/><br/>";*/
-
-echo "匹配不包含属性的简单html标签<pre>";
-$str = file_get_contents('mask.html');
-$matches = [];
-$pattern['a'] = '#(?<=<div>).*#';
-//$pattern['a'] = '#<div[^>]*>(.*?)<\/div>#s';
-preg_match_all($pattern['a'], $str, $matches);
-//$matches = preg_grep($pattern['htmlTag'], $arr);
-//print_r(array_map('htmlspecialchars', $matches[0]));
-print_r($matches);
-echo "</pre><br/><br/>";
-
 
 echo "匹配div标签<pre>";
 $str = file_get_contents('mask.html');
@@ -186,5 +173,26 @@ print_r(array_map('htmlspecialchars', $matches[0]));
 //print_r($matches);
 echo "</pre><br/><br/>";
 
+
+echo "匹配div标签里的内容<pre>";
+$str = file_get_contents('mask.html');
+$matches = [];
+$pattern['a'] = '#(?<=<div)(?!>*?>).*?(?=</div>)#s';
+//$pattern['a'] = '#<div[^>]*>(.*?)<\/div>#s';
+preg_match_all($pattern['a'], $str, $matches);
+//$matches = preg_grep($pattern['htmlTag'], $arr);
+print_r(array_map('htmlspecialchars', $matches[0]));
+//print_r($matches);
+echo "</pre><br/><br/>";
+
+
+echo "量词检测<pre>";
+$arr = ['123123', '1231', '321234'];
+$matches = [];
+$pattern['repeat'] = '#(123)+#s';
+preg_match_all($pattern['repeat'], $arr[0], $matches);
+//$matches = preg_grep($pattern['repeat'], $arr);
+print_r($matches);
+echo "</pre><br/><br/>";
 
 

@@ -33,3 +33,4 @@ checkin 2018-09-14
 checkin 2019-09-17
 checkin 2018-09-18
 checkin 2018-09-19
+checkin 2018-09-20

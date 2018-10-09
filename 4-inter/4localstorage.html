@@ -1,0 +1,36 @@
+<script type="text/javascript">
+localStorage.a = 3;        //设置值的方式1
+console.log(localStorage.a);
+localStorage["a"] = "abc";     //设置值的方式2
+console.log(localStorage.a);
+localStorage.setItem("b","I am b"); //设置值的方式3
+console.log(localStorage.b, localStorage["b"]);
+localStorage.removeItem("b");
+//清除所有值
+//localStorage.clear();
+//console.log(localStorage);
+//遍历localStorage
+var showStorage = function() {
+    var storage = localStorage;
+    for(var i=0;i<storage.length;i++)  {
+        console.log(storage.key(i) + "=" + storage.getItem(storage.key(i)) + "<br/>");
+    }
+}
+
+//showStorage();
+
+//监听storage事件
+if (window.addEventListener) {
+    window.addEventListener("storage", handle_storage, false);
+} else if (window.attachEvent) {
+    window.attachEvent("onstorage", handle_storage);
+}
+
+function handle_storage(e) {
+    if(!e) {
+        e = window.envent;
+    }
+    showStorage();
+}
+    
+</script>

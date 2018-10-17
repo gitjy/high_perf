@@ -49,3 +49,4 @@ checkin 2018-10-12
 checkin 2018-10-13
 checkin 2018-10-15
 checkin 2018-10-16
+checkin 2018-10-17

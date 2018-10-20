@@ -52,3 +52,4 @@ checkin 2018-10-16
 checkin 2018-10-17
 checkin 2018-10-18
 checkin 2018-10-19
+checkin 2018-10-20

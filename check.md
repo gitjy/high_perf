@@ -77,3 +77,4 @@ checkin 2018-11-23
 checkin 2018-11-26
 checkin 2018-11-27
 echeckin 2018-11-28
+checkin 2018-11-29

@@ -80,3 +80,4 @@ echeckin 2018-11-28
 checkin 2018-11-29
 
  checkin 2018-12-03
+checkin 2018-12-05

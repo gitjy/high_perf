@@ -85,3 +85,4 @@ checkin 2018-12-05
  cehckin 2018-12-10
 checkin 2018-12-11
 checkin 2018-12-12
+checkin 2018-12-13

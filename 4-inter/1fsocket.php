@@ -1,5 +1,5 @@
 <?php
-
+//可用
 $url = "www.example.com";
 $fp = fsockopen($url, 80, $errno, $errstr, 30);
 if (!$fp) {

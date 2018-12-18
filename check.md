@@ -90,3 +90,4 @@ checkin 2018-12-14
 checkin 2018-12-15
 
  checkin 2018-12-17
+checkin 2018-12-18

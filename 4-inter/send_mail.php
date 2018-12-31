@@ -1,11 +1,11 @@
 <?php
-//SMTP测试代码 失败 504
+//SMTP测试代码  成功
 include ("smtp_mail.class.php");
 
-$host = "smtp.exmail.qq.com";
+$host = "ssl://smtp.exmail.qq.com";
 $port = 465;
 $user = "jiangyong@iyuedan.com";
-$pass = "pass";
+$pass = $argv[1];	//To do implemnt
 
 $from = "jiangyong@iyuedan.com";
 $to =  "1107985549@qq.com";

@@ -17,14 +17,14 @@ class smtp_mail {
         $this->mail_format = $format;
         $this->debug = $debug;
 
-        $this->sock = fsockopen($this->host, $this->port, $errno, $errstr, 30);
+        $this->sock = fsockopen($this->host, $this->port, $errno, $errstr, 5);
 
         if (!$this->sock) {
                 exit("error:" . $error . ",msg:" . $errstr);
         }
 
-         $respense = fgets($this->sock);
-         if (strstr($response, "220") === false) {
+         $response = fgets($this->sock);
+         if (strpos($response, "220") === false) {
               exit("server error:" . $response);
         }
     }
@@ -39,8 +39,8 @@ class smtp_mail {
      private function do_command($cmd, $return_code) {
          fwrite($this->sock, $cmd);
          $response = fgets($this->sock);
-         if (strstr($response, "$return_code")  === false) {
-             $this->show_debug($respnse);
+         $this->show_debug(substr($cmd, 0, 100) . ':'. $response);
+         if (strpos($response, "$return_code") === false) {
              return false;
          }
          return true;
@@ -81,16 +81,23 @@ class smtp_mail {
            
             $detail .= "charset=gb2312\r\n\r\n";
             $detail .= $body;
+            $commands = [
+              ["HELO " . $this->host . "\r\n", 250], \\["EHLO $host", "220,250"];
+              ["AUTH LOGIN\r\n", 334],
+              [$this->user . "\r\n", 334],
+              [$this->pass . "\r\n", 235],
+              ["MAIL FROM: ". $from.  "\r\n", 250],
+              ["RCPT TO: ". $to.  "\r\n", 250],
+              ["DATA\r\n", 354],
+              ["$detail\r\n.\r\n", 250],  \\["$detail\r\n", 250],[".\r\n", 250]
+              ["QUIT\r\n", 354],
+            ];
 
-            $this->do_command("HELO " . $this->name . "\r\n", 250);
-            $this->do_command("AUTH LOGIN\r\n", 334);
-            $this->do_command($this->user . "\r\n", 334);
-            $this->do_command($this->pass . "\r\n", 235);
-            $this->do_command("MAIL FROM: ". $from.  "\r\n", 250);
-            $this->do_command("RCPT TO: ". $to.  "\r\n", 250);
-            $this->do_command("DATA\r\n", 354);
-            $this->do_command("$detail\r\n.\r\n", 250);
-            $this->do_command("$QUIT\r\n", 250);
+            foreach ($commands as $command) {
+              if (!$this->do_command($command[0], $command[1])) {
+                exit('exit');
+              }
+            }
             return true;
       }
 }

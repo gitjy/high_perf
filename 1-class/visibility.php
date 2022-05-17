@@ -4,6 +4,7 @@
 */
 class animal
 {
+	protected $db ='mysql';
 	const b = 1;
 
 	public function move()
@@ -30,7 +31,7 @@ class dog extends animal
 		echo 'move';
 	}*/
 
-	public function see()
+	protected function see()
 	{
 		echo 'two eyes';
 	}
@@ -44,4 +45,5 @@ class dog extends animal
 $black = new dog();
 echo dog::b;
 echo animal::b;
-$black->see();
+$black->db;
+echo 'end';
